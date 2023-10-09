@@ -16,6 +16,7 @@
 	<description>Crm System</description>
 	<properties>
 		<java.version>17</java.version>
+		<database.name>${DATABASE_NAME}</database.name>
 		<sql.name>${SQL_NAME}</sql.name>
 		<sql.password>${SQL_PASSWORD}</sql.password>
 	</properties>
