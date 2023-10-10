@@ -182,7 +182,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>crm</finalName>
+		<finalName>${Business}</finalName>
 	</build>
 
 </project>
