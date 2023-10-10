@@ -143,6 +143,31 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>replace-placeholder</id>
+						<phase>test</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>site.easy.to.build.crm.util.CustomPlaceholderReplacer</mainClass>
+							<arguments>
+								<argument>${Database}</argument> <!-- Pass the database name as an argument -->
+								<argument>replace-schema.sql</argument> <!-- Path to your script file -->
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<!-- Add dependencies required by your CustomPlaceholderReplacer class -->
+					<!-- Make sure to include the appropriate versions of the dependencies -->
+				</dependencies>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
