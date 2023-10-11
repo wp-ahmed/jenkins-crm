@@ -19,8 +19,8 @@
 		<database.name>${Database}</database.name>
 		<sql.name>${SqlName}</sql.name>
 		<sql.password>${SqlPassword}</sql.password>
-		<client.id>${ClientId}</client.id>
-		<client.secret>${ClientSecret}</client.secret>
+		<google.client.id>${ClientId}</google.client.id>
+		<google.client.secret>${ClientSecret}</google.client.secret>
 	</properties>
 	<dependencies>
 		<dependency>
