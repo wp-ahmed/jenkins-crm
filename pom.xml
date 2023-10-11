@@ -16,9 +16,9 @@
 	<description>Crm System</description>
 	<properties>
 		<java.version>17</java.version>
-		<database.name>${DATABASE_NAME}</database.name>
-		<sql.name>${SQL_NAME}</sql.name>
-		<sql.password>${SQL_PASSWORD}</sql.password>
+		<database.name>${Database}</database.name>
+		<sql.name>${SqlName}</sql.name>
+		<sql.password>${SqlPassword}</sql.password>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -143,31 +143,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.0.0</version>
-				<executions>
-					<execution>
-						<id>replace-placeholder</id>
-						<phase>test</phase>
-						<goals>
-							<goal>java</goal>
-						</goals>
-						<configuration>
-							<mainClass>site.easy.to.build.crm.util.CustomPlaceholderReplacer</mainClass>
-							<arguments>
-								<argument>${Database}</argument> <!-- Pass the database name as an argument -->
-								<argument>replace-schema.sql</argument> <!-- Path to your script file -->
-							</arguments>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<!-- Add dependencies required by your CustomPlaceholderReplacer class -->
-					<!-- Make sure to include the appropriate versions of the dependencies -->
-				</dependencies>
-			</plugin>
-			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
@@ -184,5 +159,38 @@
 		</plugins>
 		<finalName>${Business}</finalName>
 	</build>
-
+<profiles>
+		<profile>
+			<id>replace-placeholder</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>replace-placeholder</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>src/main/resources</outputDirectory>
+									<resources>
+										<resource>
+											<directory>src/main/resources</directory>
+											<filtering>true</filtering>
+											<includes>
+												<include>schema.sql</include>
+											</includes>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
