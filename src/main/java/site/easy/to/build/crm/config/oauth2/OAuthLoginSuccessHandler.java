@@ -171,14 +171,15 @@ public class OAuthLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
                     registrationId
             );
 
+            String homeLink = request.getContextPath().isEmpty() ? "/" : request.getContextPath() + "/";
 
             SecurityContextHolder.getContext().setAuthentication(updatedAuthentication);
             if (user.getStatus().equals("inactive")) {
-                response.sendRedirect("/account-inactive");
+                response.sendRedirect(homeLink + "account-inactive");
             } else if (user.getStatus().equals("suspended")) {
-                response.sendRedirect("/account-suspended");
+                response.sendRedirect(homeLink + "account-suspended");
             } else {
-                response.sendRedirect("/employee/settings/google-services");
+                response.sendRedirect(homeLink + "employee/settings/google-services");
             }
         }
     }
